@@ -1,152 +1,95 @@
 
 import { Form, Field } from 'react-final-form';
 import {Container} from 'reactstrap';
+import { fetchAPI } from '../api/Common';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const onSubmit = async values => {
   await sleep(300);
-  window.alert(JSON.stringify(values, 0, 2));
+  const URL = "http://localhost:3001/students/";
+  let raw = {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(values)
+  };
+
+  fetchAPI(URL, raw)
+  .then(() => alert("Student added!"))
+  .catch(err => console.log(err))
+
+  // window.alert(JSON.stringify(values, 0, 2));
 }
 
 export const FinalForm = () => (
   <Container>
-    <h1>React Final Form - Simple Example</h1>
-    <a
-      href="https://final-form.org/react"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Read Docs
-    </a>
+    <h2>React Final Form - Add New Student</h2>
     <Form
       onSubmit={onSubmit}
-      initialValues={{ stooge: 'larry', employed: false }}
+      initialValues={{}}
       render={({ handleSubmit, form, submitting, pristine, values }) => (
         <form onSubmit={handleSubmit}>
           <div className='mb-3'>
-            <label>First Name</label>&nbsp;
+            <label>Fullname:</label>&nbsp;
             <Field
-              name="firstName"
+              name="name"
               component="input"
               type="text"
-              placeholder="First Name"
+              placeholder="Full Name"
             />
           </div>
           <div className='mb-3'>
-            <label>Last Name</label>&nbsp;
+            <label>Address</label>&nbsp;
             <Field
-              name="lastName"
+              name="address"
               component="input"
               type="text"
-              placeholder="Last Name"
+              placeholder="Address"
             />
           </div>
           <div className='mb-3'>
-            <label>Employed</label>&nbsp;
-            <Field name="employed" component="input" type="checkbox" />
+            <label>Birthday</label>&nbsp;
+            <Field
+              name="birthday"
+              component="input"
+              type="date"
+              placeholder="Birthday"
+            />
           </div>
           <div className='mb-3'>
-            <label>Favorite Color</label>&nbsp;
-            <Field name="favoriteColor" component="select">
-              <option />
-              <option value="#ff0000">❤️ Red</option>
-              <option value="#00ff00">💚 Green</option>
-              <option value="#0000ff">💙 Blue</option>
-            </Field>
-          </div>
-          <div className='mb-3'>
-            <label>Toppings</label>&nbsp;
-            <Field name="toppings" component="select" multiple>
-              <option value="chicken">🐓 Chicken</option>
-              <option value="ham">🐷 Ham</option>
-              <option value="mushrooms">🍄 Mushrooms</option>
-              <option value="cheese">🧀 Cheese</option>
-              <option value="tuna">🐟 Tuna</option>
-              <option value="pineapple">🍍 Pineapple</option>
-            </Field>
-          </div>
-          <div className='mb-3'>
-            <label>Sauces</label>&nbsp;
+            <label>Gender</label>
             <div>
               <label>
                 <Field
-                  name="sauces"
+                  name="gender"
                   component="input"
-                  type="checkbox"
-                  value="ketchup"
+                  type="radio"
+                  value="male"
                 />{' '}
-                Ketchup
+                Male
               </label>
               &nbsp;
               <label>
                 <Field
-                  name="sauces"
+                  name="gender"
                   component="input"
-                  type="checkbox"
-                  value="mustard"
+                  type="radio"
+                  value="female"
                 />{' '}
-                Mustard
-              </label>
-              &nbsp;
-              <label>
-                <Field
-                  name="sauces"
-                  component="input"
-                  type="checkbox"
-                  value="mayonnaise"
-                />{' '}
-                Mayonnaise
-              </label>
-              &nbsp;
-              <label>
-                <Field
-                  name="sauces"
-                  component="input"
-                  type="checkbox"
-                  value="guacamole"
-                />{' '}
-                Guacamole 🥑
+                Female
               </label>
             </div>
           </div>
           <div className='mb-3'>
-            <label>Best Stooge</label>
-            <div>
-              <label>
-                <Field
-                  name="stooge"
-                  component="input"
-                  type="radio"
-                  value="larry"
-                />{' '}
-                Larry
-              </label>
-              &nbsp;
-              <label>
-                <Field
-                  name="stooge"
-                  component="input"
-                  type="radio"
-                  value="moe"
-                />{' '}
-                Moe
-              </label>
-              &nbsp;
-              <label>
-                <Field
-                  name="stooge"
-                  component="input"
-                  type="radio"
-                  value="curly"
-                />{' '}
-                Curly
-              </label>
-            </div>
-          </div>
-          <div className='mb-3'>
-            <label>Notes</label>&nbsp;
-            <Field name="notes" component="textarea" placeholder="Notes" />
+            <label>School Year</label>&nbsp;
+            <Field
+              name="schoolYear"
+              component="input"
+              type="number"
+              placeholder="School Year"
+            />
           </div>
           <div className="mb-3">
             <button type="submit" disabled={submitting || pristine}>

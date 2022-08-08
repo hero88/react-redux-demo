@@ -1,0 +1,28 @@
+{
+  "students": [
+    {
+      "id": 3,
+      "name": "Thủy",
+      "address": "HN",
+      "gender": "female",
+      "birthday": "10-10-2000",
+      "schoolYear": 2017
+    },
+    {
+      "id": 4,
+      "name": "Kim",
+      "address": "Huế",
+      "gender": "female",
+      "birthday": "08-08-2004",
+      "schoolYear": 2018
+    },
+    {
+      "id": 5,
+      "name": "An",
+      "address": "Đà Nẵng",
+      "gender": "male",
+      "birthday": "14-06-2002",
+      "schoolYear": 2019
+    }
+  ]
+}
